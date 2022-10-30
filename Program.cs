@@ -17,7 +17,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddDbContext<DataContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("MainAssHelpString")));
 
-var app = builder.Build();
+var app = builder.Build(); 
 
 
 

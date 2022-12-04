@@ -4,6 +4,7 @@ using AssignmentHelpers.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AssignmentHelpers.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221117110844_First")]
+    partial class First
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,6 +57,8 @@ namespace AssignmentHelpers.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("clientId");
 
                     b.ToTable("assignments");
                 });
@@ -205,6 +209,17 @@ namespace AssignmentHelpers.Migrations
                     b.HasIndex("clientId");
 
                     b.ToTable("testimonies");
+                });
+
+            modelBuilder.Entity("AssignmentHelpers.Models.assignment", b =>
+                {
+                    b.HasOne("AssignmentHelpers.Models.client", "client")
+                        .WithMany()
+                        .HasForeignKey("clientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("client");
                 });
 
             modelBuilder.Entity("AssignmentHelpers.Models.testimony", b =>

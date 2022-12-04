@@ -18,6 +18,6 @@ namespace AssignmentHelpers.Models
         public string currency { get; set; }
 
         public DateTime deadline { get; set; }
-        public client client { get; set; }
+        //public client client { get; set; }
     }
 }

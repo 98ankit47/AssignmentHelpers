@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AssignmentHelpers.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221030103735_First")]
-    partial class First
+    [Migration("20221117112037_alter")]
+    partial class alter
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,8 +57,6 @@ namespace AssignmentHelpers.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("clientId");
 
                     b.ToTable("assignments");
                 });
@@ -134,8 +132,9 @@ namespace AssignmentHelpers.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("lastName")
-                        .HasColumnType("int");
+                    b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("state")
                         .IsRequired()
@@ -210,33 +209,15 @@ namespace AssignmentHelpers.Migrations
                     b.ToTable("testimonies");
                 });
 
-            modelBuilder.Entity("AssignmentHelpers.Models.assignment", b =>
-                {
-                    b.HasOne("AssignmentHelpers.Models.client", "client")
-                        .WithMany("assignments")
-                        .HasForeignKey("clientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("client");
-                });
-
             modelBuilder.Entity("AssignmentHelpers.Models.testimony", b =>
                 {
                     b.HasOne("AssignmentHelpers.Models.client", "client")
-                        .WithMany("testimonies")
+                        .WithMany()
                         .HasForeignKey("clientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("client");
-                });
-
-            modelBuilder.Entity("AssignmentHelpers.Models.client", b =>
-                {
-                    b.Navigation("assignments");
-
-                    b.Navigation("testimonies");
                 });
 #pragma warning restore 612, 618
         }

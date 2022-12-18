@@ -53,16 +53,16 @@ namespace AssignmentHelpers.Controllers
             var exClient = await DBdata.clients.FirstOrDefaultAsync(x => x.Id == id);
             if (exClient != null)
             {
-                exClient.firstName = exClient.firstName;
-                exClient.lastName = exClient.lastName;
-                exClient.email = exClient.email;
-                exClient.Address = exClient.Address;
-                exClient.city = exClient.city;
-                exClient.state = exClient.state;
-                exClient.country = exClient.country;
-                exClient.course = exClient.course;
-                exClient.university = exClient.university;
-                exClient.duration = exClient.duration;
+                exClient.firstName = ct.firstName;
+                exClient.lastName = ct.lastName;
+                exClient.email = ct.email;
+                exClient.Address = ct.Address;
+                exClient.city = ct.city;
+                exClient.state = ct.state;
+                exClient.country = ct.country;
+                exClient.course = ct.course;
+                exClient.university = ct.university;
+                exClient.duration = ct.duration;
                 await DBdata.SaveChangesAsync();
                 return Ok(exClient);
             }

@@ -5,7 +5,6 @@ namespace AssignmentHelpers.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
         public string feedPic { get; set; }
         [Required]
         public string description { get; set; }

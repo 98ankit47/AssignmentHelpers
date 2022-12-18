@@ -16,6 +16,8 @@ namespace AssignmentHelpers.Models
         public string lastName { get; set; }
         [Required]
         public string email { get; set; }
+       [StringLength(20, MinimumLength = 6, ErrorMessage = "Must be at least 6 characters long.")]
+        public string password { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]
@@ -29,7 +31,7 @@ namespace AssignmentHelpers.Models
         public int duration { get; set; }
         public string google_api_id { get; set; }
 
-        //public ICollection<assignment> assignments { get; set; }
+       // public ICollection<assignment> assignments { get; set; }
         //public ICollection<testimony> testimonies { get; set; }
 
     }

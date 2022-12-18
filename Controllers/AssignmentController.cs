@@ -18,7 +18,7 @@ namespace AssignmentHelpers.Controllers
         public async Task<IActionResult> GetAllAssigment()
         {
             var assignment = await Assignmentdata.assignments.ToListAsync();
-            return Ok(Assignmentdata);
+            return Ok(assignment);
         }
         [Route("{id:int}")]
         [ActionName("GetAssigment")]
@@ -31,7 +31,7 @@ namespace AssignmentHelpers.Controllers
             {
                 return NotFound(" No Assignment");
             }
-            return Ok(Assignmentdata);
+            return Ok(assignment);
         }
 
         [HttpPost]

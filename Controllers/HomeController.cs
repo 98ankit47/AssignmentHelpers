@@ -80,6 +80,12 @@ namespace AssignmentHelpers.Controllers
                 return NotFound("Feed Not found");
             }
         }
+
+        public bool login(string username,string password)
+        {
+
+            return false;
+        }
     }
     
 }

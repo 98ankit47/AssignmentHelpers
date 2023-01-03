@@ -7,7 +7,7 @@ namespace AssignmentHelpers.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class HomeController : Controller
     {
         private readonly DataContext DBdata;
@@ -26,6 +26,7 @@ namespace AssignmentHelpers.Controllers
         [Route("{id:int}")]
         [ActionName("GetFeed")]
         [HttpGet]
+
         public async Task<IActionResult> GetFeed([FromRoute] int id)
         {
             //Firstordefault will return null value if criteria not mean and first will throw exception
@@ -38,7 +39,7 @@ namespace AssignmentHelpers.Controllers
         }
 
         [HttpPost]
-
+        [ActionName("AddFeed")]
         public async Task<IActionResult> AddFeed([FromBody] feed fd)
         {
             await DBdata.feeds.AddAsync(fd);
@@ -49,6 +50,7 @@ namespace AssignmentHelpers.Controllers
 
         [HttpPut]
         [Route("{id:int}")]
+        [ActionName("UpdateFeed")]
         public async Task<IActionResult> UpdateFeed([FromRoute] int id, feed fd)
         {
             var exFeed = await DBdata.feeds.FirstOrDefaultAsync(x => x.Id == id);
@@ -66,6 +68,7 @@ namespace AssignmentHelpers.Controllers
         }
         [HttpDelete]
         [Route("{id:int}")]
+        [ActionName("DeleteFeed")]
         public async Task<IActionResult> DeleteFeed([FromRoute] int id)
         {
             var exFeed = await DBdata.feeds.FirstOrDefaultAsync(x => x.Id == id);
@@ -80,12 +83,20 @@ namespace AssignmentHelpers.Controllers
                 return NotFound("Feed Not found");
             }
         }
-
-        public bool login(string username,string password)
+        [HttpGet]
+        [ActionName("Login")]
+        public async Task<bool> loginAsync(string username,string password)
         {
-
+            var isAuth = await DBdata.clients.FirstOrDefaultAsync(x => x.email == username && x.password == password);
+            if (isAuth != null)
+            {
+                return true;
+            }
             return false;
-        }
+         }
+
     }
     
 }
+
+
